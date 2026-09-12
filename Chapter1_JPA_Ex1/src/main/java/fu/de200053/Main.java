@@ -35,23 +35,23 @@ public class Main {
 //
 //        System.out.println("Sau save, ID = "
 //                + employee.getId());
-
-        System.out.println("\n===== TODO 0.4 - FIND BY ID =====");
-
-        Employee foundEmployee = dao.findById(1L);
-
-        System.out.println("Employee tim thay:");
-        System.out.println(foundEmployee);
-
-        System.out.println("\n===== TODO 0.4 - FIND ALL =====");
-
-        List<Employee> employees = dao.findAll();
-
-        System.out.println("Tong so Employee: " + employees.size());
-
-        for (Employee e : employees) {
-            System.out.println(e);
-        }
+//
+//        System.out.println("\n===== TODO 0.4 - FIND BY ID =====");
+//
+//        Employee foundEmployee = dao.findById(1L);
+//
+//        System.out.println("Employee tim thay:");
+//        System.out.println(foundEmployee);
+//
+//        System.out.println("\n===== TODO 0.4 - FIND ALL =====");
+//
+//        List<Employee> employees = dao.findAll();
+//
+//        System.out.println("Tong so Employee: " + employees.size());
+//
+//        for (Employee e : employees) {
+//            System.out.println(e);
+//        }
 
 //        System.out.println("\n===== TEST ID KHONG TON TAI =====");
 //
@@ -59,6 +59,51 @@ public class Main {
 //
 //        System.out.println("Ket qua: " + notFound);
 
+        
+
+        System.out.println("\n===== TODO 0.5 - FIND BY EMAIL =====");
+
+        Employee employeeByEmail =
+                dao.findByEmail("nguyenvana@gmail.com");
+
+        System.out.println("Tim theo email:");
+        System.out.println(employeeByEmail);
+
+
+// Test email khong ton tai
+        Employee notFoundByEmail =
+                dao.findByEmail("khongtontai@gmail.com");
+
+        System.out.println("Email khong ton tai:");
+        System.out.println(notFoundByEmail);
+
+
+// ===== TODO 0.5 - FIND BY SALARY =====
+
+        System.out.println("\n===== TODO 0.5 - FIND BY SALARY =====");
+
+        List<Employee> highSalaryEmployees =
+                dao.findBySalaryGreaterThan(new BigDecimal("1000"));
+
+        System.out.println("Employee co salary > 1000:");
+
+        for (Employee e : highSalaryEmployees) {
+            System.out.println(e);
+        }
+
+
+// Test truong hop khong co ket qua
+        List<Employee> noEmployees =
+                dao.findBySalaryGreaterThan(new BigDecimal("100000"));
+
+        System.out.println("Employee co salary > 100000:");
+
+        for (Employee e : noEmployees) {
+            System.out.println(e);
+        }
+
         emf.close();
+
+
     }
 }

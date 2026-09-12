@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
+import java.math.BigDecimal;
 
 public class EmployeeDAO {
 
@@ -59,6 +60,52 @@ public class EmployeeDAO {
                             "SELECT e FROM Employee e",
                             Employee.class
                     );
+
+            return query.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
+
+    // TODO 0.5 - FIND BY EMAIL
+    public Employee findByEmail(String email) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            TypedQuery<Employee> query =
+                    em.createQuery(
+                            "SELECT e FROM Employee e WHERE e.email = :email",
+                            Employee.class
+                    );
+
+            query.setParameter("email", email);
+
+            List<Employee> employees = query.getResultList();
+
+            if (employees.isEmpty()) {
+                return null;
+            }
+
+            return employees.get(0);
+
+        } finally {
+            em.close();
+        }
+    }
+
+    // TODO 0.5 - FIND BY MINIMUM SALARY
+    public List<Employee> findBySalaryGreaterThan(BigDecimal salary) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            TypedQuery<Employee> query =
+                    em.createQuery(
+                            "SELECT e FROM Employee e WHERE e.salary > :salary",
+                            Employee.class
+                    );
+
+            query.setParameter("salary", salary);
 
             return query.getResultList();
 
