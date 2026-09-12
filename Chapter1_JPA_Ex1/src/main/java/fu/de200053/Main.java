@@ -59,48 +59,64 @@ public class Main {
 //
 //        System.out.println("Ket qua: " + notFound);
 
-        
-
-        System.out.println("\n===== TODO 0.5 - FIND BY EMAIL =====");
-
-        Employee employeeByEmail =
-                dao.findByEmail("nguyenvana@gmail.com");
-
-        System.out.println("Tim theo email:");
-        System.out.println(employeeByEmail);
 
 
-// Test email khong ton tai
-        Employee notFoundByEmail =
-                dao.findByEmail("khongtontai@gmail.com");
+//        System.out.println("\n===== TODO 0.5 - FIND BY EMAIL =====");
+//
+//        Employee employeeByEmail =
+//                dao.findByEmail("nguyenvana@gmail.com");
+//
+//        System.out.println("Tim theo email:");
+//        System.out.println(employeeByEmail);
+//
+//
+//
+//        Employee notFoundByEmail =
+//                dao.findByEmail("khongtontai@gmail.com");
+//
+//        System.out.println("Email khong ton tai:");
+//        System.out.println(notFoundByEmail);
+//
+//
+//
+//
+//        System.out.println("\n===== TODO 0.5 - FIND BY SALARY =====");
+//
+//        List<Employee> highSalaryEmployees =
+//                dao.findBySalaryGreaterThan(new BigDecimal("1000"));
+//
+//        System.out.println("Employee co salary > 1000:");
+//
+//        for (Employee e : highSalaryEmployees) {
+//            System.out.println(e);
+//        }
+//
+//
+//
+//        List<Employee> noEmployees =
+//                dao.findBySalaryGreaterThan(new BigDecimal("100000"));
+//
+//        System.out.println("Employee co salary > 100000:");
+//
+//        for (Employee e : noEmployees) {
+//            System.out.println(e);
+//        }
 
-        System.out.println("Email khong ton tai:");
-        System.out.println(notFoundByEmail);
+        System.out.println("\n===== TODO 0.6 - UPDATE =====");
 
+        Employee employeeToUpdate = dao.findById(1L);
 
-// ===== TODO 0.5 - FIND BY SALARY =====
+        System.out.println("Truoc update:");
+        System.out.println(employeeToUpdate);
 
-        System.out.println("\n===== TODO 0.5 - FIND BY SALARY =====");
+        employeeToUpdate.setSalary(new BigDecimal("2000.00"));
 
-        List<Employee> highSalaryEmployees =
-                dao.findBySalaryGreaterThan(new BigDecimal("1000"));
+        dao.update(employeeToUpdate);
 
-        System.out.println("Employee co salary > 1000:");
+        Employee updatedEmployee = dao.findById(1L);
 
-        for (Employee e : highSalaryEmployees) {
-            System.out.println(e);
-        }
-
-
-// Test truong hop khong co ket qua
-        List<Employee> noEmployees =
-                dao.findBySalaryGreaterThan(new BigDecimal("100000"));
-
-        System.out.println("Employee co salary > 100000:");
-
-        for (Employee e : noEmployees) {
-            System.out.println(e);
-        }
+        System.out.println("Sau update:");
+        System.out.println(updatedEmployee);
 
         emf.close();
 
