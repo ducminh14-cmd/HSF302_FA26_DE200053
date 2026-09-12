@@ -101,22 +101,34 @@ public class Main {
 //        for (Employee e : noEmployees) {
 //            System.out.println(e);
 //        }
+//
+//        System.out.println("\n===== TODO 0.6 - UPDATE =====");
+//
+//        Employee employeeToUpdate = dao.findById(1L);
+//
+//        System.out.println("Truoc update:");
+//        System.out.println(employeeToUpdate);
+//
+//        employeeToUpdate.setSalary(new BigDecimal("2000.00"));
+//
+//        dao.update(employeeToUpdate);
+//
+//        Employee updatedEmployee = dao.findById(1L);
+//
+//        System.out.println("Sau update:");
+//        System.out.println(updatedEmployee);
 
-        System.out.println("\n===== TODO 0.6 - UPDATE =====");
+        System.out.println("\n===== TODO 0.7 - DELETE =====");
 
-        Employee employeeToUpdate = dao.findById(1L);
+        System.out.println("Truoc khi xoa:");
+        Employee employeeBeforeDelete = dao.findById(1L);
+        System.out.println(employeeBeforeDelete);
 
-        System.out.println("Truoc update:");
-        System.out.println(employeeToUpdate);
+        dao.delete(1L);
 
-        employeeToUpdate.setSalary(new BigDecimal("2000.00"));
-
-        dao.update(employeeToUpdate);
-
-        Employee updatedEmployee = dao.findById(1L);
-
-        System.out.println("Sau update:");
-        System.out.println(updatedEmployee);
+        System.out.println("Sau khi xoa:");
+        Employee employeeAfterDelete = dao.findById(1L);
+        System.out.println(employeeAfterDelete);
 
         emf.close();
 
