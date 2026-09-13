@@ -39,73 +39,97 @@ public class Main {
 //
 
 
-//        System.out.println("\n===== TODO 0.8 - CRUD FLOW =====");
-//
+        System.out.println("\n===== TODO 0.8 - CRUD FLOW =====");
+
 // CREATE
-//        System.out.println("\n--- CREATE ---");
-//
-//        Employee employee = new Employee();
-//        employee.setFullName("Tran Thi B");
-//        employee.setEmail("tranthib@gmail.com");
-//        employee.setSalary(new BigDecimal("1800.00"));
-//        employee.setGender(Gender.FEMALE);
-//        employee.setHireDate(LocalDate.of(2023, 3, 15));
-//        employee.setActive(true);
-//
-//        dao.save(employee);
-//
-//        System.out.println("Employee sau khi CREATE:");
-//        System.out.println(employee);
-//
-//        Long id = employee.getId();
-//
-//
+        System.out.println("\n--- CREATE ---");
+
+
+        Employee employee = new Employee();
+
+        //Entity đang ở trạng thái New/Transient trước khi save()
+        employee.setFullName("Tran Thi B");
+        employee.setEmail("tranthib@gmail.com");
+        employee.setSalary(new BigDecimal("1800.00"));
+        employee.setGender(Gender.FEMALE);
+        employee.setHireDate(LocalDate.of(2023, 3, 15));
+        employee.setActive(true);
+
+        dao.save(employee);
+        //Sau persist() trong transaction -> Managed.
+        //Khi save() return và EntityManager đóng -> entity trở thành Detached.
+
+        System.out.println("Employee sau khi CREATE:");
+        System.out.println(employee);
+
+        Long id = employee.getId();
+
+
 // READ
-//        System.out.println("\n--- READ ---");
-//
-//        Employee employeeRead = dao.findById(id);
-//
-//        System.out.println("Employee sau khi READ:");
-//        System.out.println(employeeRead);
-//
-//
+        System.out.println("\n--- READ ---");
+
+        //Entity được find() bởi EntityManager của findById(),
+        //sau khi EntityManager đóng thì object trả về là Detached.
+
+        Employee employeeRead = dao.findById(id);
+
+        System.out.println("Employee sau khi READ:");
+        System.out.println(employeeRead);
+
+
 // UPDATE
-//        System.out.println("\n--- UPDATE ---");
-//
-//        System.out.println("Employee truoc UPDATE:");
-//        System.out.println(employeeRead);
-//
-//        employeeRead.setSalary(new BigDecimal("2500.00"));
-//
-//        dao.update(employeeRead);
-//
-//        System.out.println("Da UPDATE salary = 2500.00");
-//
-//
+        System.out.println("\n--- UPDATE ---");
+
+        System.out.println("Employee truoc UPDATE:");
+        System.out.println(employeeRead);
+
+        employeeRead.setSalary(new BigDecimal("2500.00"));
+
+        dao.update(employeeRead);
+
+        // merge() tạo/trả về một Managed entity trong transaction.
+        //Object employeeRead ban đầu vẫn là Detached.
+
+
+        System.out.println("Da UPDATE salary = 2500.00");
+
+
 // READ SAU UPDATE
-//        System.out.println("\n--- READ SAU UPDATE ---");
-//
-//        Employee employeeAfterUpdate = dao.findById(id);
-//
-//        System.out.println("Employee sau UPDATE:");
-//        System.out.println(employeeAfterUpdate);
-//
-//
+        System.out.println("\n--- READ SAU UPDATE ---");
+
+        //findById() trả về entity đang Managed trong transaction,
+        //sau khi EntityManager đóng thì entity trở thành Detached.
+
+        Employee employeeAfterUpdate = dao.findById(id);
+
+        System.out.println("Employee sau UPDATE:");
+        System.out.println(employeeAfterUpdate);
+
+
 // DELETE
-//        System.out.println("\n--- DELETE ---");
-//
-//        dao.delete(id);
-//
-//        System.out.println("Da xoa Employee co id = " + id);
-//
-//
+        System.out.println("\n--- DELETE ---");
+
+        dao.delete(id);
+
+        System.out.println("Da xoa Employee co id = " + id);
+
+
 // READ SAU DELETE
-//        System.out.println("\n--- READ SAU DELETE ---");
-//
-//        Employee employeeAfterDelete = dao.findById(id);
-//
-//        System.out.println("Ket qua READ sau DELETE:");
-//        System.out.println(employeeAfterDelete);
+        System.out.println("\n--- READ SAU DELETE ---");
+
+        //Entity đã bị Removed và commit,
+        //nên findById() không tìm thấy entity -> null.
+
+
+        Employee employeeAfterDelete = dao.findById(id);
+
+        System.out.println("Ket qua READ sau DELETE:");
+        System.out.println(employeeAfterDelete);
+
+
+
+
+
 
         System.out.println("\n===== TODO 0.9 - UNIQUE EMAIL =====");
 
