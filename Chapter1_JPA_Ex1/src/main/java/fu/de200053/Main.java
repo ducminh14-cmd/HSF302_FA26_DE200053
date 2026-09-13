@@ -36,99 +36,79 @@ public class Main {
 //        System.out.println("Sau save, ID = "
 //                + employee.getId());
 //
-//        System.out.println("\n===== TODO 0.4 - FIND BY ID =====");
 //
-//        Employee foundEmployee = dao.findById(1L);
-//
-//        System.out.println("Employee tim thay:");
-//        System.out.println(foundEmployee);
-//
-//        System.out.println("\n===== TODO 0.4 - FIND ALL =====");
-//
-//        List<Employee> employees = dao.findAll();
-//
-//        System.out.println("Tong so Employee: " + employees.size());
-//
-//        for (Employee e : employees) {
-//            System.out.println(e);
-//        }
-
-//        System.out.println("\n===== TEST ID KHONG TON TAI =====");
-//
-//        Employee notFound = dao.findById(999999L);
-//
-//        System.out.println("Ket qua: " + notFound);
 
 
+        System.out.println("\n===== TODO 0.8 - CRUD FLOW =====");
 
-//        System.out.println("\n===== TODO 0.5 - FIND BY EMAIL =====");
-//
-//        Employee employeeByEmail =
-//                dao.findByEmail("nguyenvana@gmail.com");
-//
-//        System.out.println("Tim theo email:");
-//        System.out.println(employeeByEmail);
-//
-//
-//
-//        Employee notFoundByEmail =
-//                dao.findByEmail("khongtontai@gmail.com");
-//
-//        System.out.println("Email khong ton tai:");
-//        System.out.println(notFoundByEmail);
-//
-//
-//
-//
-//        System.out.println("\n===== TODO 0.5 - FIND BY SALARY =====");
-//
-//        List<Employee> highSalaryEmployees =
-//                dao.findBySalaryGreaterThan(new BigDecimal("1000"));
-//
-//        System.out.println("Employee co salary > 1000:");
-//
-//        for (Employee e : highSalaryEmployees) {
-//            System.out.println(e);
-//        }
-//
-//
-//
-//        List<Employee> noEmployees =
-//                dao.findBySalaryGreaterThan(new BigDecimal("100000"));
-//
-//        System.out.println("Employee co salary > 100000:");
-//
-//        for (Employee e : noEmployees) {
-//            System.out.println(e);
-//        }
-//
-//        System.out.println("\n===== TODO 0.6 - UPDATE =====");
-//
-//        Employee employeeToUpdate = dao.findById(1L);
-//
-//        System.out.println("Truoc update:");
-//        System.out.println(employeeToUpdate);
-//
-//        employeeToUpdate.setSalary(new BigDecimal("2000.00"));
-//
-//        dao.update(employeeToUpdate);
-//
-//        Employee updatedEmployee = dao.findById(1L);
-//
-//        System.out.println("Sau update:");
-//        System.out.println(updatedEmployee);
+// CREATE
+        System.out.println("\n--- CREATE ---");
 
-        System.out.println("\n===== TODO 0.7 - DELETE =====");
+        Employee employee = new Employee();
+        employee.setFullName("Tran Thi B");
+        employee.setEmail("tranthib@gmail.com");
+        employee.setSalary(new BigDecimal("1800.00"));
+        employee.setGender(Gender.FEMALE);
+        employee.setHireDate(LocalDate.of(2023, 3, 15));
+        employee.setActive(true);
 
-        System.out.println("Truoc khi xoa:");
-        Employee employeeBeforeDelete = dao.findById(1L);
-        System.out.println(employeeBeforeDelete);
+        dao.save(employee);
 
-        dao.delete(1L);
+        System.out.println("Employee sau khi CREATE:");
+        System.out.println(employee);
 
-        System.out.println("Sau khi xoa:");
-        Employee employeeAfterDelete = dao.findById(1L);
+        Long id = employee.getId();
+
+
+// READ
+        System.out.println("\n--- READ ---");
+
+        Employee employeeRead = dao.findById(id);
+
+        System.out.println("Employee sau khi READ:");
+        System.out.println(employeeRead);
+
+
+// UPDATE
+        System.out.println("\n--- UPDATE ---");
+
+        System.out.println("Employee truoc UPDATE:");
+        System.out.println(employeeRead);
+
+        employeeRead.setSalary(new BigDecimal("2500.00"));
+
+        dao.update(employeeRead);
+
+        System.out.println("Da UPDATE salary = 2500.00");
+
+
+// READ SAU UPDATE
+        System.out.println("\n--- READ SAU UPDATE ---");
+
+        Employee employeeAfterUpdate = dao.findById(id);
+
+        System.out.println("Employee sau UPDATE:");
+        System.out.println(employeeAfterUpdate);
+
+
+// DELETE
+        System.out.println("\n--- DELETE ---");
+
+        dao.delete(id);
+
+        System.out.println("Da xoa Employee co id = " + id);
+
+
+// READ SAU DELETE
+        System.out.println("\n--- READ SAU DELETE ---");
+
+        Employee employeeAfterDelete = dao.findById(id);
+
+        System.out.println("Ket qua READ sau DELETE:");
         System.out.println(employeeAfterDelete);
+
+
+
 
         emf.close();
 
