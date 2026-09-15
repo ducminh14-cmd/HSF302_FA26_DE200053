@@ -1,4 +1,138 @@
 package fu.de200053.pojo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
+
+@Entity
+@Table(name = "employees")
 public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String fullName;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal salary;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    private LocalDate hireDate;
+
+    private boolean active;
+
+    @Transient
+    private int yearsOfService;
+
+    // Constructor không tham số - bắt buộc cho JPA
+    public Employee() {
+    }
+
+    // Constructor tiện dụng
+    public Employee(String email, String fullName, Gender gender,
+                    BigDecimal salary, LocalDate hireDate) {
+        this.email = email;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.salary = salary;
+        this.hireDate = hireDate;
+        this.active = true;
+    }
+
+    // Getter + Setter
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public int getYearsOfService() {
+        if (hireDate == null) {
+            return 0;
+        }
+
+        return Period.between(hireDate, LocalDate.now()).getYears();
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", salary=" + salary +
+                ", gender=" + gender +
+                ", hireDate=" + hireDate +
+                ", active=" + active +
+                ", yearsOfService=" + getYearsOfService() +
+                '}';
+    }
 }
