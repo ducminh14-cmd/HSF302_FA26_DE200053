@@ -105,4 +105,23 @@ public class DepartmentDAO {
             em.close();
         }
     }
+
+    // FIND BY ID WITH EMPLOYEES
+    public Department findByIdWithEmployees(Long id) {
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try {
+            return em.createQuery(
+                            "SELECT d FROM Department d JOIN FETCH d.employees WHERE d.id = :id",
+                            Department.class
+                    )
+                    .setParameter("id", id)
+                    .getSingleResult();
+
+        } finally {
+            em.close();
+        }
+    }
+
+
 }
