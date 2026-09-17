@@ -133,5 +133,20 @@ public class DepartmentDAO {
         }
     }
 
+    // TODO 2.9 - FIND ALL WITH EMPLOYEES
+    public List<Department> findAllWithEmployees() {
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try {
+            return em.createQuery(
+                    "SELECT DISTINCT d FROM Department d JOIN FETCH d.employees",
+                    Department.class
+            ).getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
+
 
 }

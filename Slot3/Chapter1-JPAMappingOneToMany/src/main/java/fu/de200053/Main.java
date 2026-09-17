@@ -30,16 +30,18 @@ public class Main {
 //        System.out.println("Đã thêm: "+ dept.getName());
         DepartmentDAO departmentDAO = new DepartmentDAO();
 
-        // TODO 2.8 - Test N+1 Query Problem
-        List<Department> departments = departmentDAO.findAll();
+        // TODO 2.9 - Test JOIN FETCH
+        List<Department> departments =
+                departmentDAO.findAllWithEmployees();
 
         for (Department d : departments) {
-
             System.out.println("Department: " + d.getName());
 
-            System.out.println(
-                    "Employees: " + d.getEmployees().size()
-            );
+            for (Employee e : d.getEmployees()) {
+                System.out.println(
+                        "Employee: " + e.getFullName()
+                );
+            }
         }
 
         JPAUtil.close();
