@@ -36,15 +36,25 @@ public class DepartmentDAO {
         EntityManager em = JPAUtil.getEntityManager();
 
         try {
-            return em.createQuery(
+            List<Department> departments = em.createQuery(
                     "SELECT d FROM Department d",
                     Department.class
             ).getResultList();
+
+            // TODO 2.8 - Trigger N+1
+            for (Department d : departments) {
+                d.getEmployees().size();
+            }
+
+            return departments;
 
         } finally {
             em.close();
         }
     }
+
+
+
 
     // READ BY ID
     public Department findById(Long id) {

@@ -4,9 +4,11 @@ import fu.de200053.dao.DepartmentDAO;
 import fu.de200053.pojo.Department;
 import fu.de200053.pojo.Employee;
 import fu.de200053.pojo.Gender;
+import fu.de200053.util.JPAUtil;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -26,47 +28,21 @@ public class Main {
 //        DepartmentDAO deptDAO = new DepartmentDAO();
 //        deptDAO.save(dept);
 //        System.out.println("Đã thêm: "+ dept.getName());
-
         DepartmentDAO departmentDAO = new DepartmentDAO();
 
-        // 1. Tạo Department
-        Department it = new Department("Marketing", "Ha Noi");
+        // TODO 2.8 - Test N+1 Query Problem
+        List<Department> departments = departmentDAO.findAll();
 
-        // 2. Tạo 3 Employee
-        Employee e1 = new Employee(
-                "aa.nguyen@company.com",
-                "Nguyen Van A",
-                Gender.MALE,
-                new BigDecimal("15000000"),
-                LocalDate.of(2022, 1, 10)
-        );
+        for (Department d : departments) {
 
-        Employee e2 = new Employee(
-                "bb.tran@company.com",
-                "Tran Thi B",
-                Gender.FEMALE,
-                new BigDecimal("18000000"),
-                LocalDate.of(2021, 6, 1)
-        );
+            System.out.println("Department: " + d.getName());
 
-        Employee e3 = new Employee(
-                "cc.le@company.com",
-                "Le Van C",
-                Gender.OTHER,
-                new BigDecimal("12000000"),
-                LocalDate.of(2023, 3, 15)
-        );
+            System.out.println(
+                    "Employees: " + d.getEmployees().size()
+            );
+        }
 
-        // 3. Thêm Employee vào Department bằng helper method
-        it.addEmployee(e1);
-        it.addEmployee(e2);
-        it.addEmployee(e3);
-
-        // 4. Chỉ lưu Department
-        // cascade = ALL sẽ tự động lưu 3 Employee
-        departmentDAO.save(it);
-
-        System.out.println("Da luu Department, id = " + it.getId());
+        JPAUtil.close();
 
     }
 }
