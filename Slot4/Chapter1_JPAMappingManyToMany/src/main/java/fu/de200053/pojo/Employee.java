@@ -142,5 +142,10 @@ public class Employee {
         return Objects.hash(email);
     }
 
+    public void assignToProject(Project p) {
+        this.projects.add(p);
+        p.getEmployees().add(this);
+    }
+
 
 }
