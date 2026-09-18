@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -102,5 +103,22 @@ public class Project {
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Project project = (Project) o;
+
+        // Không dùng id vì id chỉ được sinh sau khi persist.
+        return Objects.equals(projectCode, project.projectCode);
+    }
+
+    @Override
+    public int hashCode() {
+        // Dùng projectCode làm business key, không dùng id.
+        return Objects.hash(projectCode);
     }
 }
