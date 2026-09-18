@@ -1,0 +1,45 @@
+package fu.de200053;
+
+import fu.de200053.pojo.Employee;
+import fu.de200053.util.JPAUtil;
+
+import java.util.List;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+//        Department dept = new Department("Marketing", "Ha Noi");
+//        Employee emp = new Employee("test2@company.com", "Test", Gender.OTHER,
+//                new BigDecimal("1000"), LocalDate.now());
+//        Employee e2 = new Employee("bc@company.com", "B", Gender.FEMALE,
+//                new BigDecimal("1200"), LocalDate.of(2022, 2, 1));
+//        Employee e3 = new Employee("cd@company.com", "C", Gender.OTHER,
+//                new BigDecimal("1500"), LocalDate.of(2022, 3, 1));
+//        dept.addEmployee(emp);
+//        dept.addEmployee(e2);
+//        dept.addEmployee(e3);
+//
+//        DepartmentDAO deptDAO = new DepartmentDAO();
+//        deptDAO.save(dept);
+//        System.out.println("Đã thêm: "+ dept.getName());
+        DepartmentDAO departmentDAO = new DepartmentDAO();
+
+        // TODO 2.9 - Test JOIN FETCH
+        List<Department> departments =
+                departmentDAO.findAllWithEmployees();
+
+        for (Department d : departments) {
+            System.out.println("Department: " + d.getName());
+
+            for (Employee e : d.getEmployees()) {
+                System.out.println(
+                        "Employee: " + e.getFullName()
+                );
+            }
+        }
+
+        JPAUtil.close();
+
+    }
+}
