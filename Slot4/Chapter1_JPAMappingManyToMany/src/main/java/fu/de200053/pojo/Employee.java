@@ -7,10 +7,15 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
@@ -33,6 +38,14 @@ public class Employee {
     private Gender gender;
 
     private boolean active = true;
+
+    @ManyToMany
+    @JoinTable(
+            name = "employee_project",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private Set<Project> projects = new HashSet<>();
 
     public Employee() {
     }
@@ -101,5 +114,13 @@ public class Employee {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }
