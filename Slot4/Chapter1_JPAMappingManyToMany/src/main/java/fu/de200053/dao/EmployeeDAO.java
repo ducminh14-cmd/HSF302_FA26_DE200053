@@ -58,4 +58,32 @@ public class EmployeeDAO {
             em.close();
         }
     }
+
+    public void findEmployeesInMoreThanOneProject() {
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try {
+            String jpql = """
+                SELECT e FROM Employee e
+                WHERE e.active = true
+                AND SIZE(e.projects) > 1
+                """;
+
+            var query = em.createQuery(jpql, Employee.class);
+
+            var employees = query.getResultList();
+
+            for (Employee employee : employees) {
+                System.out.println(
+                        "Employee: " + employee.getFullName()
+                                + " | Email: " + employee.getEmail()
+                                + " | Number of projects: "
+                                + employee.getProjects().size()
+                );
+            }
+
+        } finally {
+            em.close();
+        }
+    }
 }
