@@ -18,7 +18,7 @@ public class Main {
 
         EmployeeDAO employeeDAO = new EmployeeDAO();
 
-        employeeDAO.findEmployeesInMoreThanOneProject();
+        employeeDAO.deactivateEmployee(1L);
     }
 }
 
