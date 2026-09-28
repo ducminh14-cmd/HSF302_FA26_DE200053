@@ -46,5 +46,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     // Các method được cài đặt dần từ TODO 6
+
+    @Override
+    public Optional<Student> findByStudentCode(String studentCode) {
+        return studentRepository.findByStudentCode(studentCode);
+    }
+
+    @Override
+    public boolean isEmailExisted(String email) {
+        return studentRepository.existsByEmail(email);
+    }
+
+    @Override
+    public long countActive() {
+        return studentRepository.countByActiveTrue();
+    }
+
 }
 
