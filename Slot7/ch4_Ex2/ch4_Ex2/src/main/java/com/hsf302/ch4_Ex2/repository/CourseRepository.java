@@ -13,4 +13,12 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     long countBySemester(String semester);
 
+    List<Course> findByStudents_StudentCodeOrderByCodeAsc(String studentCode);
+    List<Course> findByStudents_Department_CodeOrderByCodeAsc(String deptCode);          // có thể TRÙNG
+    List<Course> findDistinctByStudents_Department_CodeOrderByCodeAsc(String deptCode);  // loại trùng
+
+
+
+
+
 }
