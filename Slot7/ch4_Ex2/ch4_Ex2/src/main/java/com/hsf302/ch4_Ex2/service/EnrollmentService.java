@@ -1,4 +1,12 @@
 package com.hsf302.ch4_Ex2.service;
 
+import com.hsf302.ch4_Ex2.pojo.Course;
+import com.hsf302.ch4_Ex2.pojo.Student;
+
+import java.util.List;
+
 public interface EnrollmentService {
+    List<Course> getCoursesOfStudent(String studentCode);
+    List<Student> getStudentsOfCourse(String courseCode);
+
 }
