@@ -1,5 +1,6 @@
 package com.hsf302.ch4_Ex2.repository;
 
+import com.hsf302.ch4_Ex2.dto.EnrollmentView;
 import com.hsf302.ch4_Ex2.dto.StudentCreditDTO;
 import com.hsf302.ch4_Ex2.dto.StudentSummary;
 import com.hsf302.ch4_Ex2.pojo.Course;
@@ -110,6 +111,14 @@ public interface StudentRepository extends JpaRepository<Student, Long>,
     // StudentRepository
     @Query("SELECT s FROM Student s LEFT JOIN FETCH s.courses WHERE s.studentCode = :code")
     Optional<Student> findByStudentCodeWithCourses(@Param("code") String studentCode);
+
+    @Query("SELECT s.studentCode AS studentCode, s.fullName AS fullName, " +
+            "       c.code AS courseCode, c.name AS courseName, c.credits AS credits " +
+            "FROM Student s JOIN s.department d JOIN s.courses c " +
+            "WHERE d.code = :deptCode " +
+            "ORDER BY s.studentCode, c.code")
+    List<EnrollmentView> findEnrollmentsOfDepartment(@Param("deptCode") String deptCode);
+
 
 
 }

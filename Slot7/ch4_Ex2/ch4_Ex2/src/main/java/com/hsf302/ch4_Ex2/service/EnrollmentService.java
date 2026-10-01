@@ -1,5 +1,6 @@
 package com.hsf302.ch4_Ex2.service;
 
+import com.hsf302.ch4_Ex2.dto.EnrollmentView;
 import com.hsf302.ch4_Ex2.dto.StudentCreditDTO;
 import com.hsf302.ch4_Ex2.pojo.Course;
 import com.hsf302.ch4_Ex2.pojo.Student;
@@ -24,5 +25,7 @@ public interface EnrollmentService {
     List<Student> findStudentsWithMoreThan(int n);
     // EnrollmentService
     Student getStudentWithCourses(String studentCode);
+    List<EnrollmentView> getEnrollmentsOfDepartment(String deptCode);
+
 
 }
