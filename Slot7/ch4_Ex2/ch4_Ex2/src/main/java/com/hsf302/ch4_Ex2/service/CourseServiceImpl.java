@@ -1,5 +1,6 @@
 package com.hsf302.ch4_Ex2.service;
 
+import com.hsf302.ch4_Ex2.dto.CourseStatDTO;
 import com.hsf302.ch4_Ex2.pojo.Course;
 import com.hsf302.ch4_Ex2.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
@@ -64,5 +65,11 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> findCoursesWithoutStudents() {
         return courseRepository.findByStudentsIsEmpty();
     }
+
+    @Override
+    public List<CourseStatDTO> getStatistics() {
+        return courseRepository.getCourseStats();
+    }
+
 
 }
