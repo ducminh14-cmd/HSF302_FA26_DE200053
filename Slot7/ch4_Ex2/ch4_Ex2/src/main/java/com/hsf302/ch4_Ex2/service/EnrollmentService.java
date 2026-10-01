@@ -22,5 +22,7 @@ public interface EnrollmentService {
     List<StudentCreditDTO> getCreditSummary(int minCredits);
     // EnrollmentService
     List<Student> findStudentsWithMoreThan(int n);
+    // EnrollmentService
+    Student getStudentWithCourses(String studentCode);
 
 }

@@ -22,4 +22,6 @@ public interface CourseService {
 
     // CourseService
     List<Course> findFullCourses();
+    // CourseService
+    Course getWithStudents(String code);
 }

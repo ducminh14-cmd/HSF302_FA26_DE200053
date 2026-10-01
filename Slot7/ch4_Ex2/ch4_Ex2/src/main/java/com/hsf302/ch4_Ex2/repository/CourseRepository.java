@@ -2,6 +2,7 @@ package com.hsf302.ch4_Ex2.repository;
 
 import com.hsf302.ch4_Ex2.dto.CourseStatDTO;
 import com.hsf302.ch4_Ex2.pojo.Course;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -29,6 +30,10 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     // CourseRepository
     @Query("SELECT c FROM Course c WHERE SIZE(c.students) >= c.capacity ORDER BY c.code")
     List<Course> findFullCourses();
+
+    // CourseRepository
+    @EntityGraph(attributePaths = "students")
+    Optional<Course> findWithStudentsByCode(String code);
 
 
 
