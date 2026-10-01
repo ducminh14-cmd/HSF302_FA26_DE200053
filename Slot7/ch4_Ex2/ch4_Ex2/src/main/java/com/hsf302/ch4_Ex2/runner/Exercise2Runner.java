@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import com.hsf302.ch4_Ex2.pojo.Course;
 
 import java.util.Collection;
 
@@ -27,14 +28,14 @@ public class Exercise2Runner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         partB();
-        partC();
-        partD();
-        bonus();        // chạy trên dữ liệu gốc → trước Part E
-        partE();
+//        partC();
+//        partD();
+//        bonus();        // chạy trên dữ liệu gốc → trước Part E
+//        partE();
     }
 
     // Tạm comment, mở dần khi làm từng TODO
-    private void partB() { /* todo6(); todo7(); */ }
+    private void partB() { todo6(); /*todo7(); */ }
     private void partC() { /* todo8(); todo9(); todo10(); todo11(); */ }
     private void partD() { /* todo12(); ... todo19(); */ }
     private void bonus() { /* todo25(); */ }
@@ -58,6 +59,15 @@ public class Exercise2Runner implements CommandLineRunner {
             System.out.println("   [OK]   " + label);
         } catch (RuntimeException e) {
             System.out.println("   [FAIL] " + label + " -> " + e.getMessage());
+        }
+    }
+    private void todo6() {
+        title("TODO 6: count, findAll(Sort), findById");
+        System.out.println("Total courses: " + courseService.count());
+        printList("All courses order by code", courseService.findAllOrderByCode());
+        for (long id : new long[]{2L, 99L}) {
+            System.out.println("findById(" + id + "): "
+                    + courseService.findById(id).map(Course::toString).orElse("Not found"));
         }
     }
 }
