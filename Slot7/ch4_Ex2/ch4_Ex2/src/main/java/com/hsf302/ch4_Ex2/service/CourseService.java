@@ -1,5 +1,6 @@
 package com.hsf302.ch4_Ex2.service;
 
+import com.hsf302.ch4_Ex2.dto.CourseEnrollmentCount;
 import com.hsf302.ch4_Ex2.dto.CourseStatDTO;
 import com.hsf302.ch4_Ex2.pojo.Course;
 
@@ -24,4 +25,6 @@ public interface CourseService {
     List<Course> findFullCourses();
     // CourseService
     Course getWithStudents(String code);
+    List<CourseEnrollmentCount> findTopEnrolled(int n);
+
 }
