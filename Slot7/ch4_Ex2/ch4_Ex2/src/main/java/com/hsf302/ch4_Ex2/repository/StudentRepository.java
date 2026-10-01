@@ -1,6 +1,7 @@
 package com.hsf302.ch4_Ex2.repository;
 
 import com.hsf302.ch4_Ex2.dto.StudentSummary;
+import com.hsf302.ch4_Ex2.pojo.Course;
 import com.hsf302.ch4_Ex2.pojo.Department;
 import com.hsf302.ch4_Ex2.pojo.Gender;
 import com.hsf302.ch4_Ex2.pojo.Student;
@@ -84,5 +85,11 @@ public interface StudentRepository extends JpaRepository<Student, Long>,
     List<Student> findByCourses_CodeOrderByFullNameAsc(String courseCode);
     long countByCourses_Code(String courseCode);
     List<Student> findByCourses_CodeAndActiveTrueOrderByFullNameAsc(String courseCode);
+
+    // StudentRepository
+    List<Student> findByCoursesIsEmptyOrderByFullNameAsc();
+    boolean existsByStudentCodeAndCourses_Code(String studentCode, String courseCode);
+
+
 
 }

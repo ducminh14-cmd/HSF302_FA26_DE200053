@@ -15,4 +15,6 @@ public interface CourseService {
     List<Course> findCoursesOfStudent(String studentCode);
     List<Course> findCoursesOfDepartment(String deptCode, boolean distinct);
 
+    // CourseService
+    List<Course> findCoursesWithoutStudents();
 }
