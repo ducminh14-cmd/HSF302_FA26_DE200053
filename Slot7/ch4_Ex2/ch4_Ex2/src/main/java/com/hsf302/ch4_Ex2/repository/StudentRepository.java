@@ -1,5 +1,6 @@
 package com.hsf302.ch4_Ex2.repository;
 
+import com.hsf302.ch4_Ex2.dto.StudentCreditDTO;
 import com.hsf302.ch4_Ex2.dto.StudentSummary;
 import com.hsf302.ch4_Ex2.pojo.Course;
 import com.hsf302.ch4_Ex2.pojo.Department;
@@ -95,6 +96,12 @@ public interface StudentRepository extends JpaRepository<Student, Long>,
     List<Student> findGoodStudentsInCourse(@Param("code") String courseCode,
                                            @Param("minGpa") double minGpa);
 
+    @Query("SELECT new com.hsf302.ch4_Ex2.dto.StudentCreditDTO(s.studentCode, s.fullName, COUNT(c), SUM(c.credits)) " +
+            "FROM Student s JOIN s.courses c " +
+            "GROUP BY s.studentCode, s.fullName " +
+            "HAVING SUM(c.credits) >= :minCredits " +
+            "ORDER BY SUM(c.credits) DESC, s.fullName")
+    List<StudentCreditDTO> getCreditSummary(@Param("minCredits") long minCredits);
 
 
 }
