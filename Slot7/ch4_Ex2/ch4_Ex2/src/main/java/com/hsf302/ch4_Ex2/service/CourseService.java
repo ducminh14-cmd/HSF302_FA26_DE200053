@@ -20,4 +20,6 @@ public interface CourseService {
     List<Course> findCoursesWithoutStudents();
     List<CourseStatDTO> getStatistics();
 
+    // CourseService
+    List<Course> findFullCourses();
 }

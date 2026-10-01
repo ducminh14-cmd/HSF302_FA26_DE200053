@@ -48,8 +48,8 @@ public class Exercise2Runner implements CommandLineRunner {
     private void partD() {
          //todo12();
         //todo13();
-        todo14();
-//        todo15();
+        //todo14();
+       todo15();
 //        todo16();
 //        todo17();
 //        todo18();
@@ -151,6 +151,13 @@ public class Exercise2Runner implements CommandLineRunner {
                 "   %s | %-15s | %d course(s) | %d credits%n",
                 d.studentCode(), d.fullName(), d.courseCount(), d.totalCredits()));
     }
+
+    private void todo15() {
+        title("TODO 15: SIZE() on collections");
+        printList("(a) Full courses", courseService.findFullCourses());
+        printList("(b) Students with more than 2 courses", enrollmentService.findStudentsWithMoreThan(2));
+    }
+
 
 
 }
