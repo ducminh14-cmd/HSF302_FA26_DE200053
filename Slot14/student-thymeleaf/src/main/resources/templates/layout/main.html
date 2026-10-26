@@ -10,7 +10,7 @@
     <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">Student Manager</title>
 
     <!-- TODO 8.2: Link CSS Bootstrap offline và style.css bằng th:href="@{...}" -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -66,6 +66,6 @@
 </footer>
 
 <!-- TODO 8.7: Script Bootstrap Bundle offline (đã gồm Popper.js) -->
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
