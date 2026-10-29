@@ -4,6 +4,7 @@ module com.fu.ch08 {
 
     // Cho phép JavaFX khởi chạy DrinkOrderApp ở package b1
     exports com.fu.ch08.b1;
+    exports com.fu.ch08.b2;
 
     // Cho phép các bài sau dùng được AlertUtil ở package common
     exports com.fu.ch08.common;
